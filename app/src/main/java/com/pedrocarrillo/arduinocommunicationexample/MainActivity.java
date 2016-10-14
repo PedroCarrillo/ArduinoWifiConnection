@@ -46,9 +46,10 @@ public class MainActivity extends AppCompatActivity implements WifiInteractor {
             public void onClick(View view) {
                 i++;
                 if (i%2 == 0) {
-//                    wifiSocketClients.get(0).sendMessage("1");
+                    connectionHandlerList.get(0).getWifiSocketClient().sendMessage("1");
 //                    wifiSocketClients.get(1).sendMessage("0");
                 } else {
+                    connectionHandlerList.get(0).getWifiSocketClient().sendMessage("0");
 //                    wifiSocketClients.get(1).sendMessage("1");
 //                    wifiSocketClients.get(0).sendMessage("0");
                 }
@@ -63,7 +64,8 @@ public class MainActivity extends AppCompatActivity implements WifiInteractor {
 
         try {
             // Get the remote host from the UI and start the thread
-            String host = "192.168.1.14";
+//            String host = "192.168.1.14";
+            String host = "192.168.43.47";
             int port = 23;
 
             WifiSocketClient first = new WifiSocketClient(host, port, this);
@@ -71,10 +73,10 @@ public class MainActivity extends AppCompatActivity implements WifiInteractor {
 //            first.execute();
 //            wifiSocketClients.add(first);
 
-            String host2 = "192.168.1.18";
-            int port2 = 24;
-            WifiSocketClient second = new WifiSocketClient(host2, port2, this);
-            connectionHandlerList.add(new ConnectionHandler(second));
+//            String host2 = "192.168.1.18";
+//            int port2 = 24;
+//            WifiSocketClient second = new WifiSocketClient(host2, port2, this);
+//            connectionHandlerList.add(new ConnectionHandler(second));
 //            wifiSocketClients.add(second);
 
 

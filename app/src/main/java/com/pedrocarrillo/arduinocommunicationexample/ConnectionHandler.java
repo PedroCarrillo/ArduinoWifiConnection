@@ -20,4 +20,8 @@ public class ConnectionHandler implements Runnable {
         wifiSocketClient.execute();
     }
 
+    public WifiSocketClient getWifiSocketClient() {
+        return wifiSocketClient;
+    }
+
 }
