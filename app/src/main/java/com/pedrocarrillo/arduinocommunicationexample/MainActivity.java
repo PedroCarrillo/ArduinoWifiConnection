@@ -35,67 +35,87 @@ public class MainActivity extends AppCompatActivity implements WifiInteractor {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        List<TestHandler> handlerList = new ArrayList<>();
+        handlerList.add(new TestHandler());
+        for (final TestHandler testHandler : handlerList) {
 
-        Log.e(TAG, ConnectivityManager.getIpAddress(this));
-
-       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                i++;
-                if (i%2 == 0) {
-                    connectionHandlerList.get(0).getWifiSocketClient().sendMessage("1");
-//                    wifiSocketClients.get(1).sendMessage("0");
-                } else {
-                    connectionHandlerList.get(0).getWifiSocketClient().sendMessage("0");
-//                    wifiSocketClients.get(1).sendMessage("1");
-//                    wifiSocketClients.get(0).sendMessage("0");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    new Thread(testHandler).start();
                 }
-            }
-        });
+            }, 1);
+
+        }
+
+        handlerList.get(0).setNumber(4);
+
+        handlerList.get(0).setNumber(6);
 
 
-//        if(wifiTask != null) {
-//            setStatus("Already connected!");
-//            return;
-//        }
-
-        try {
-            // Get the remote host from the UI and start the thread
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        Log.e(TAG, ConnectivityManager.getIpAddress(this));
+//
+//       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                i++;
+//                if (i%2 == 0) {
+//                    connectionHandlerList.get(0).sendMessage("1");
+//                    connectionHandlerList.get(1).sendMessage("0");
+////                    wifiSocketClients.get(1).sendMessage("0");
+//                } else {
+//                    connectionHandlerList.get(0).sendMessage("0");
+//                    connectionHandlerList.get(1).sendMessage("1");
+////                    wifiSocketClients.get(1).sendMessage("1");
+////                    wifiSocketClients.get(0).sendMessage("0");
+//                }
+//            }
+//        });
+//
+//
+////        if(wifiTask != null) {
+////            setStatus("Already connected!");
+////            return;
+////        }
+//
+//        try {
+//            // Get the remote host from the UI and start the thread
 //            String host = "192.168.1.14";
-            String host = "192.168.43.47";
-            int port = 23;
-
-            WifiSocketClient first = new WifiSocketClient(host, port, this);
-            connectionHandlerList.add(new ConnectionHandler(first));
-//            first.execute();
-//            wifiSocketClients.add(first);
-
+////            String host = "192.168.43.47";
+//            int port = 23;
+//
+//            WifiSocketClient first = new WifiSocketClient(host, port, this);
+//            connectionHandlerList.add(new ConnectionHandler(first));
+////            first.execute();
+////            wifiSocketClients.add(first);
+//
 //            String host2 = "192.168.1.18";
-//            int port2 = 24;
+//            int port2 = 23;
 //            WifiSocketClient second = new WifiSocketClient(host2, port2, this);
 //            connectionHandlerList.add(new ConnectionHandler(second));
-//            wifiSocketClients.add(second);
-
-
-            for (final ConnectionHandler connectionHandler : connectionHandlerList) {
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                         new Thread(connectionHandler).start();
-                    }
-                }, 5000);
-
-            }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            setStatus("Invalid address/port!");
-        }
+////            wifiSocketClients.add(second);
+//
+//
+//            for (final ConnectionHandler connectionHandler : connectionHandlerList) {
+//
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                         new Thread(connectionHandler).start();
+//                    }
+//                }, 5000);
+//
+//            }
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            setStatus("Invalid address/port!");
+//        }
 
     }
 

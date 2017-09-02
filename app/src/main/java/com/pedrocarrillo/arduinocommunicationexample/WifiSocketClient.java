@@ -37,7 +37,7 @@ public class WifiSocketClient extends AsyncTask<Void, String, Void> {
     private boolean disconnectSignal = false;
 
     // Socket timeout - close if no messages received (ms)
-    private int timeout = 5000;
+    private int timeout = 15000;
 
     // Constructor
     WifiSocketClient(String address, int port, WifiInteractor wifiInteractor) {

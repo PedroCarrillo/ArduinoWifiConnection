@@ -22,6 +22,7 @@ public class ConnectivityManager {
         } catch (Exception e) {
             return null;
         }
+
     }
 
 }
